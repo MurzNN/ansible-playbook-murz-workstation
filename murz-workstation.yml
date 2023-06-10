@@ -6,3 +6,25 @@
 
   roles:
     - ddev
+
+  tasks:
+    - name: install apt packages
+      apt:
+        pkg:
+          - age
+          - code
+        state: latest
+        update_cache: true
+
+    - name: install snap packages
+      community.general.snap:
+        name:
+          - skype
+          - zoom-client
+          - kubectl
+
+    - name: install snap classic packages
+      community.general.snap:
+        name:
+          - chezmoi
+        classic: true
