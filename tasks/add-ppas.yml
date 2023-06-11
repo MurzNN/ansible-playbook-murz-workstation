@@ -1,0 +1,12 @@
+
+- name: "add apt repo {{ item }}"
+  apt_repository:
+    repo: "{{ item }}"
+    filename: "{{ item | replace('ppa:', '') | replace('/', '_') }}"
+  when: ppas is defined
+  loop: "{{ ppas }}"
+  
+- name: "install apt packages: {{ packages }}"
+  apt:
+    pkg: "{{ packages }}"
+  when: packages is defined

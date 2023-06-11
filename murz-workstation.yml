@@ -3,18 +3,29 @@
 
   collections:
     - murznn.ddev
-
+    - orjangj.editors
+    
   roles:
     - ddev
+    - orjangj.editors.vscode
 
   tasks:
+
+    - name: install crow-translate
+      import_tasks: tasks/add-ppas.yml
+      vars:
+        ppas: 
+          - "ppa:jonmagon/crow-translate" 
+          - "ppa:dschopf/plasma-applet-qalculate" 
+
     - name: install apt packages
       apt:
         pkg:
           - age
           - code
-        state: latest
-        update_cache: true
+          - ksnip
+          - crow-translate
+          - plasma-applet-qalculate
 
     - name: install snap packages
       community.general.snap:
@@ -22,9 +33,13 @@
           - skype
           - zoom-client
           - kubectl
+          - kontena-lens
+          - chezmoi
+          - spotify
 
     - name: install snap classic packages
       community.general.snap:
         name:
           - chezmoi
         classic: true
+
