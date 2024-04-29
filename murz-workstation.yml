@@ -2,11 +2,13 @@
   become: true
 
   collections:
-    - murznn.ddev
+    # - murznn.ddev
+    # - murznn.expandrive
     - orjangj.editors
 
   roles:
-    - ddev
+    # - murznn.ddev
+    # - murznn.expandrive
     - orjangj.editors.vscode
 
   tasks:
@@ -14,8 +16,10 @@
       import_tasks: tasks/add-ppas.yml
       vars:
         ppas:
-          - 'ppa:jonmagon/crow-translate'
-          - 'ppa:dschopf/plasma-applet-qalculate'
+          - ppa:kubuntu-ppa/backports
+          - ppa:jonmagon/crow-translate
+          - ppa:dschopf/plasma-applet-qalculate
+          - ppa:boltgolt/howdy
 
     - name: Install apt packages
       apt:
@@ -30,7 +34,6 @@
       community.general.snap:
         name:
           - zoom-client
-          - chezmoi
           - spotify
 
     - name: Install snap classic packages
@@ -41,3 +44,17 @@
           - kubectl
           - skype
         classic: true
+
+    - name: 'Cron task to rotate temp directory'
+      cron:
+        name: 'Cron task to rotate temp directory'
+        user: '{{ ansible_config_user }}'
+        minute: '3'
+        hour: '2'
+        day: '1'
+        job: '~/bin/temp-rotate'
+
+    - name: Install howdy package
+      apt:
+        pkg:
+          - howdy
