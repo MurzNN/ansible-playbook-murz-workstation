@@ -2,14 +2,15 @@
   become: true
 
   collections:
-    # - murznn.ddev
+    #- murznn.ddev
     # - murznn.expandrive
     - orjangj.editors
 
   roles:
-    # - murznn.ddev
+    #- murznn.ddev
     # - murznn.expandrive
     - orjangj.editors.vscode
+    - geerlingguy.docker # Docker installation.
 
   tasks:
     - name: Install PPAs

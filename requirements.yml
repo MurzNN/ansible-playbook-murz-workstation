@@ -2,7 +2,9 @@
 collections:
   - murznn.ddev
   - orjangj.editors
+#  - geerlingguy.docker
 
-# roles:
+roles:
+  - geerlingguy.docker
 #   - ngetchell.vscode
   # - gantsign.visual-studio-code
